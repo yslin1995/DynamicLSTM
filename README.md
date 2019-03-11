@@ -2,7 +2,7 @@
 
 TensorFlow implementation of [Long Short-Term Memory with Dynamic Skip Connections](https://arxiv.org/pdf/1811.03873.pdf) (AAAI 2019).
 
-![Model](E:\code\DynamicLSTM\img\model.png)
+![Model](.\img\model.png)
 
 The code is partially referred to https://github.com/tensorflow/models.
 
