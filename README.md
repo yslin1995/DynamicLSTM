@@ -12,11 +12,11 @@ The code is partially referred to https://github.com/tensorflow/models.
 - Numpy
 - TensorFlow 1.0
 
-
-
 ## Usage
 
-### Language Modeling 
+### Language Modeling Task
+
+To evaluate the model on the Penn Treebank language model corpus, you can run the following command under the directory of ./LanguageModeling.
 
 ```
 $ python RL_train.py --rnn_size 650 --rnn_layers 2 --lamda 1 --n_actions 5
@@ -24,15 +24,36 @@ $ python RL_train.py --rnn_size 650 --rnn_layers 2 --lamda 1 --n_actions 5
 
 
 
-### Number Prediction
+The hyper-parameters in this model are: 
 
-First, you should run the following command to produce train/validation/test data for the task of number prediction. (Please refer to the paper for a detailed description) 
+| Parameter     | Meaning                                        | Default |
+| :------------ | :--------------------------------------------- | ------- |
+| rnn_size      | size of LSTM internal state                    | 650     |
+| rnn_layers    | number of layers in the LSTM                   | 2       |
+| dropout       | dropout rate                                   | 0.5     |
+| lamda         | lambda value of RL                             | 1       |
+| learning_rate | initial learning rate                          | 1.0     |
+| lr_threshold  | learning rate stops decreasing after threshold | 0.005   |
+| param_init    | initialize parameter range of weights          | 0.05    |
+| n_actions     | number of actions to take                      | 5       |
+
+You can change these values by passing the arguments explicitly.
+
+
+
+### Number Prediction Task
+
+Given a sequence of L positive integers $x_{T-1}$ , and the label  $y = x_{x_{T-1}}​$, the ideal network should learn to ignore the remaining useless numbers and learn how to skip from the input data. Here are two examples to illustrate the task: 
+
+![NumberPrediction](./img/number_prediction.png)
+
+To investigate this task of number prediction,  you should produce datasets first under the directory of ./NumberPrediction by running:
 
 ```
 $ python produce_data.py
 ```
 
-Later, you can reproduce the results in the paper by executing:
+Then, you can reproduce the results on number prediction dataset (with sequence length = 10+1) by executing:
 
 ```
 $ python train_RL10_1.py
